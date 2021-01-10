@@ -1,0 +1,54 @@
+crud data pegawai
+
+- lihat struktur data pegawai (kolom database)
+- siapkan bbrp foto avatar dan tambahkan folder photo
+- buka controller dataPegawai
+- kosongkan function index
+- copy load view dari datajabatan
+- tambahkan data['title'] untuk judul
+- tambahkan data['pegawai'] = mengarahkan ke model penggajian method get_data
+
+- create view dataPegawai
+- copy isi blank template (TEST)
+- tambahkan session flash data pesan
+- tambahkan a href class mb2 mt2 dan class button untuk menambahkan data yang di arahkan ke admin/dataPegawai/tambahData
+- insert data pegawai manual di database
+- create table view data_pegawai
+- tampilkan data dengan foreach
+- tampilkan juga foto dgn <img src= php echo base_url(). 'letak folder foto'. $p->photo?>" width 75px
+- copy button edit dan delete dari data jabatan
+- sesuaikan isi nya
+- test tampil data
+
+// tambah data pegawai
+- create function tambahData di controller
+- copy data dan load view dari function index
+- edit data pegawai arahkan ke table data_jabatan
+- create view form tambah pegawai
+- paste blank template
+- tambahkan card bootstrap
+- tambahkan form dgn method post action mengarah ke base url admin/dataPegawai/tambahDataAksi
+- tambahkan div class form-group
+- label nik
+- input class form control
+- copy untuk semua kolom sesuai dgn database
+- jenis kelamin & jabatan dengan select option
+- tampilkan data jabatan dari database jabatan (menit 30)
+- status juga dengan select option
+- tambahkan form photo menit 33
+- button type submit save
+- tambahkan enctype multipart/form-data pada form (gambar)
+- card width 60%
+
+// function tambahDataAksi
+- create function tambahDataAksi
+- this _rules
+- jika validasi berjalan balik ke function tambah data
+- else , input post ke variable masing masing
+- pada var foto $_files['photo']['name']
+- tambahkan config foto di menit 43
+- siapkan array masukan ke var data
+- panggil model , insert data dari var data ke table data pegawai
+- tambahkan session set_flashdata 
+- redirect ke admin pegawai 
+- tambahkan form eror di tiap tiap form input
