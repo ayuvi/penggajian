@@ -1,10 +1,21 @@
-<?php 
+<?php
 
 /**
  * 
  */
 class DataJabatan extends CI_Controller
 {
+	public function __construct()
+	{
+		parent::__construct();
+		if ($this->session->userdata('hak_akses') != '1') {
+			$this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				  <strong>Silahkan Login terlebih dahulu!</strong> 
+				</div>');
+			redirect('welcome', 'refresh');
+		}
+	}
+
 	public function index()
 	{
 		$data['title'] = 'Data Jabatan';
@@ -31,9 +42,9 @@ class DataJabatan extends CI_Controller
 	{
 		$this->_rules();
 
-		if($this->form_validation->run() == FALSE) {
+		if ($this->form_validation->run() == FALSE) {
 			$this->tambahData();
-		}else{
+		} else {
 			$nama_jabatan = $this->input->post('nama_jabatan');
 			$gaji_pokok = $this->input->post('gaji_pokok');
 			$tj_transport = $this->input->post('tj_transport');
@@ -70,9 +81,9 @@ class DataJabatan extends CI_Controller
 	{
 		$this->_rules();
 
-		if($this->form_validation->run() == FALSE) {
+		if ($this->form_validation->run() == FALSE) {
 			$this->updateData();
-		}else{
+		} else {
 			$id 			= $this->input->post('id_jabatan');
 			$nama_jabatan 	= $this->input->post('nama_jabatan');
 			$gaji_pokok 	= $this->input->post('gaji_pokok');
@@ -90,7 +101,7 @@ class DataJabatan extends CI_Controller
 				'id_jabatan' => $id
 			];
 
-			$this->penggajianModel->update_data('data_jabatan',$data, $where);
+			$this->penggajianModel->update_data('data_jabatan', $data, $where);
 			$this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
 				  <strong>Data berhasil diupdate</strong> 
 				</div>');
@@ -98,11 +109,12 @@ class DataJabatan extends CI_Controller
 		}
 	}
 
-	public function _rules(){
-		$this->form_validation->set_rules('nama_jabatan','Nama Jabatan', 'required');
-		$this->form_validation->set_rules('gaji_pokok','Gaji Pokok', 'required');
-		$this->form_validation->set_rules('tj_transport','Tunjangan Transport', 'required');
-		$this->form_validation->set_rules('uang_makan','Uang Makan', 'required');
+	public function _rules()
+	{
+		$this->form_validation->set_rules('nama_jabatan', 'Nama Jabatan', 'required');
+		$this->form_validation->set_rules('gaji_pokok', 'Gaji Pokok', 'required');
+		$this->form_validation->set_rules('tj_transport', 'Tunjangan Transport', 'required');
+		$this->form_validation->set_rules('uang_makan', 'Uang Makan', 'required');
 	}
 
 	public function deleteData($id)
@@ -112,10 +124,6 @@ class DataJabatan extends CI_Controller
 		$this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
 				  <strong>Data berhasil dihapus</strong> 
 				</div>');
-			redirect('admin/dataJabatan');
+		redirect('admin/dataJabatan');
 	}
 }
-
-
-
-?>

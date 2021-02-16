@@ -1,6 +1,17 @@
-<?php 
+<?php
 
-class Dashboard extends CI_Controller {
+class Dashboard extends CI_Controller
+{
+	public function __construct()
+	{
+		parent::__construct();
+		if ($this->session->userdata('hak_akses') != '1') {
+			$this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				  <strong>Silahkan Login terlebih dahulu!</strong> 
+				</div>');
+			redirect('welcome', 'refresh');
+		}
+	}
 	public function index()
 	{
 		$data['title'] = "Dashboard";
@@ -21,5 +32,4 @@ class Dashboard extends CI_Controller {
 		$this->load->view('admin/dashboard', $data);
 		$this->load->view('templates/footer');
 	}
-
 }

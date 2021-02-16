@@ -58,6 +58,15 @@
                                                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?= $jabatan ?></div>
                                                 </div>
                                             </div>
+                                            <?php 
+                                                function doSomething( &$arg ){
+                                                    $return = $arg;
+                                                    $arg += 1;
+                                                    return $return;
+                                                }
+                                                $a =3;
+                                                $b = doSomething( $a );
+                                             ?>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-briefcase fa-2x text-gray-300"></i>

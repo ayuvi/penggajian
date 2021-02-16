@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 /**
  * 
  */
 class PenggajianModel extends CI_Model
 {
-	
+
 	public function get_data($table)
 	{
 		return $this->db->get($table);
@@ -13,7 +13,7 @@ class PenggajianModel extends CI_Model
 
 	public function insert_data($data, $table)
 	{
-		$this->db->insert($table,$data);
+		$this->db->insert($table, $data);
 	}
 
 	public function update_data($table, $data, $where)
@@ -27,6 +27,27 @@ class PenggajianModel extends CI_Model
 		$this->db->delete($table);
 	}
 
-}
+	public function insert_batch($table = null, $data = array())
+	{
+		$jumlah = count($data);
+		if ($jumlah > 0) {
+			$this->db->insert_batch($table, $data);
+		}
+	}
 
- ?>
+	public function cek_login()
+	{
+		$username = set_value('username');
+		$password = set_value('password');
+
+		$result = $this->db->where('username', $username)
+			->where('password', md5($password))
+			->limit(1)
+			->get('data_pegawai');
+		if ($result->num_rows() > 0) {
+			return $result->row();
+		} else {
+			return FALSE;
+		}
+	}
+}
